@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import projectData from "../../../data/projects.json";
 import ProjectCard from "../Components/ProjectCard";
 
-const page = () => {
+const Page = () => {
   console.log(projectData);
     const [projects, setProjects] = useState();
     
@@ -23,4 +23,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -35,7 +35,7 @@ const { useToken } = theme;
 const { useBreakpoint } = Grid;
 const { Text, Title, Link } = Typography;
 
-export default function App() {
+export default function Page() {
   const { token } = useToken();
   const screens = useBreakpoint();
   const router = useRouter();
@@ -148,7 +148,7 @@ export default function App() {
               Log in
             </Button>
             <div style={styles.footer}>
-              <Text style={styles.text}>Don't have an account?</Text>{" "}
+              <Text style={styles.text}>Dont have an account?</Text>{" "}
               <Link href="">Sign up now</Link>
             </div>
           </Form.Item>
