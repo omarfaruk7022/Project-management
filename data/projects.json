@@ -1,0 +1,88 @@
+[
+  {
+    "id": 1,
+    "name": "Project 1",
+    "description": "Project 1 description",
+    "date": "2021-09-01",
+    "tasks": [
+      {
+        "id": 1,
+        "name": "Task 1",
+        "description": "Task 1 description",
+        "date": "2021-09-01",
+        "assigned": [
+          {
+            "id": 1,
+            "name": "User 1",
+            "email": "user@mail.com"
+          },
+          {
+            "id": 2,
+            "name": "User 2",
+            "email": "asdasd@mail.com"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Task 2",
+        "description": "Task 2 description",
+        "date": "2021-09-01"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Project 2",
+    "description": "Project 2 description",
+    "date": "2021-09-01",
+    "tasks": [
+      {
+        "id": 3,
+        "name": "Task 1",
+        "description": "Task 1 description",
+        "date": "2021-09-01"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Project 3",
+    "description": "Project 3 description",
+    "date": "2021-09-01",
+    "tasks": [
+      {
+        "id": 4,
+        "name": "Task 1",
+        "description": "Task 1 description",
+        "date": "2021-09-01"
+      },
+      {
+        "id": 5,
+        "name": "Task 2",
+        "description": "Task 2 description",
+        "date": "2021-09-01"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Project 4",
+    "description": "Project 4 description",
+    "date": "2021-09-01",
+    "tasks": [
+      {
+        "id": 6,
+        "name": "Task 1",
+        "description": "Task 1 description",
+        "date": "2021-09-01"
+      },
+      {
+        "id": 7,
+        "name": "Task 2",
+        "description": "Task 2 description",
+        "date": "2021-09-01"
+      }
+    ]
+  }
+]
