@@ -10,6 +10,7 @@
         "name": "Task 1",
         "description": "Task 1 description",
         "date": "2021-09-01",
+        "status": "done",
         "assigned": [
           {
             "id": 1,
@@ -27,7 +28,15 @@
         "id": 2,
         "name": "Task 2",
         "description": "Task 2 description",
-        "date": "2021-09-01"
+        "date": "2021-09-01",
+        "status": "todo"
+      },
+      {
+        "id": 8,
+        "name": "Task 8",
+        "description": "Task 8 description",
+        "date": "2021-09-01",
+        "status": "todo"
       }
     ]
   },
@@ -41,7 +50,8 @@
         "id": 3,
         "name": "Task 1",
         "description": "Task 1 description",
-        "date": "2021-09-01"
+        "date": "2021-09-01",
+        "status":"in-progress"
       }
     ]
   },
@@ -55,13 +65,15 @@
         "id": 4,
         "name": "Task 1",
         "description": "Task 1 description",
-        "date": "2021-09-01"
+        "date": "2021-09-01",
+        "status":"done"
       },
       {
         "id": 5,
         "name": "Task 2",
         "description": "Task 2 description",
-        "date": "2021-09-01"
+        "date": "2021-09-01",
+        "status":"todo"
       }
     ]
   },
@@ -75,13 +87,16 @@
         "id": 6,
         "name": "Task 1",
         "description": "Task 1 description",
-        "date": "2021-09-01"
+        "date": "2021-09-01",
+        "status":"in-progress"
+
       },
       {
         "id": 7,
         "name": "Task 2",
         "description": "Task 2 description",
-        "date": "2021-09-01"
+        "date": "2021-09-01",
+        "status":"done"
       }
     ]
   }
