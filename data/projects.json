@@ -10,7 +10,7 @@
         "name": "Task 1",
         "description": "Task 1 description",
         "date": "2021-09-01",
-        "status": "done",
+        "status": "todo",
         "assigned": [
           {
             "id": 1,
