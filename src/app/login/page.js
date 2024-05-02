@@ -30,6 +30,7 @@ import { Button, Checkbox, Form, Grid, Input, theme, Typography } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import NewStore from "../store/NewStore";
 
 const { useToken } = theme;
 const { useBreakpoint } = Grid;
@@ -82,16 +83,20 @@ export default function Page() {
     },
   };
 
+  const isLoggedIn = NewStore((state) => state.isLoggedIn);
+
+  const handleLogin = () => {
+    NewStore.setState({ isLoggedIn: true });
+  };
+
   return (
     <section style={styles.section}>
       <div style={styles.container}>
         <div style={styles.header}>
-         
-
           <Title style={styles.title}>Login</Title>
           <Text style={styles.text}>
-            Welcome back to project management Please enter your details below to
-            sign in.
+            Welcome back to project management Please enter your details below
+            to sign in.
           </Text>
         </div>
         <Form
@@ -144,7 +149,12 @@ export default function Page() {
             </a>
           </Form.Item>
           <Form.Item style={{ marginBottom: "0px" }}>
-            <Button block="true" type="primary" htmlType="submit">
+            <Button
+              block="true"
+              type="primary"
+              htmlType="submit"
+              onClick={handleLogin}
+            >
               Log in
             </Button>
             <div style={styles.footer}>

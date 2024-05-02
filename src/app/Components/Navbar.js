@@ -5,6 +5,7 @@ import { Button, Grid, Menu, Space, theme } from "antd";
 
 import { MenuOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
+import NewStore from "../store/NewStore";
 
 const { useToken } = theme;
 const { useBreakpoint } = Grid;
@@ -16,24 +17,15 @@ export default function Navbar() {
 
   const menuItems = [
     {
-      label: "Dashboard",
-      key: "/",
-    },
-    {
       label: "Projects",
-      key: "projects",
-    },
-
-    {
-      label: "Settings",
-      key: "alipay",
+      key: "/",
     },
   ];
 
   const [current, setCurrent] = useState("");
   const onClick = (e) => {
-      console.log("click ", e);
-      router.push("/" + e.key)
+    console.log("click ", e);
+    router.push("/" + e.key);
     setCurrent(e.key);
   };
 
@@ -54,42 +46,58 @@ export default function Navbar() {
       width: screens.md ? "inherit" : token.sizeXXL,
     },
   };
+  const isLoggedIn = NewStore((state) => state.isLoggedIn);
+  if (!isLoggedIn) {
+    router.push("/login");
+  }
 
   return (
-    <nav className="relative border-b-2">
-      <div className="flex justify-between items-center mx-auto px-52">
-        <div className="flex items-center gap-4 w-full py-3">
-          {/* <a style={styles.logo} href="#">
+    <div>
+      {isLoggedIn ? (
+        <nav className="relative border-b-2">
+          <div className="flex justify-between items-center mx-auto px-5 md:px-20 lg:px-52">
+            <div className="flex items-center gap-4 w-full py-3">
+              {/* <a style={styles.logo} href="#">
             <Logo showText={true} />
           </a> */}
-          <Menu
-            className="bg-transparent custom-border"
-            // style={styles.menu}
-            mode="horizontal"
-            items={menuItems}
-            onClick={onClick}
-            selectedKeys={screens.md ? [current] : ""}
-            overflowedIndicator={
-              <Button type="text" icon={<MenuOutlined />}></Button>
-            }
-          />
-        </div>
-        <Space>
-          {screens.md ? (
-            <Button
-              type="text"
-              onClick={() => {
-                router.push("/login");
-              }}
-            >
-              Log in
-            </Button>
-          ) : (
-            ""
-          )}
-          <Button type="primary">Sign up</Button>
-        </Space>
-      </div>
-    </nav>
+              <Menu
+                className="bg-transparent custom-border"
+                // style={styles.menu}
+                mode="horizontal"
+                items={menuItems}
+                onClick={onClick}
+                selectedKeys={screens.md ? [current] : ""}
+                overflowedIndicator={
+                  <Button type="text" icon={<MenuOutlined />}></Button>
+                }
+              />
+            </div>
+            <Space>
+              {isLoggedIn ? (
+                <Button
+                  type="text"
+                  onClick={() => {
+                    NewStore.setState({ isLoggedIn: false });
+                  }}
+                >
+                  Log out
+                </Button>
+              ) : (
+                <Button
+                  type="text"
+                  onClick={() => {
+                    router.push("/login");
+                  }}
+                >
+                  Log in
+                </Button>
+              )}
+            </Space>
+          </div>
+        </nav>
+      ) : (
+        ""
+      )}
+    </div>
   );
 }
