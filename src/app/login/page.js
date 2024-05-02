@@ -44,7 +44,6 @@ export default function Page() {
   const [info, setInfo] = useState({ email: "", password: "" });
 
   const handleSubmit = (e) => {
-    console.log("Received values of form: ", info);
     toast.success("Login successful");
     router.push("/");
   };

@@ -32,8 +32,6 @@ const useStore = (set) => ({
 
   isLoggedIn: false,
   setIsLoggedIn: (isLoggedIn) => set({ isLoggedIn }),
-   
-
 });
 
 const NewStore = create(

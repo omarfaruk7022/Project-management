@@ -4,6 +4,7 @@ import { Card, Flex, Modal, theme, Typography } from "antd";
 import { useRouter } from "next/navigation";
 import NewStore from "../store/NewStore";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 const { useToken } = theme;
 const { Text } = Typography;
@@ -42,7 +43,6 @@ export default function ProjectCard({ project, refetch }) {
   };
   const showTask = (id) => {
     const singleTask = filteredTaskList.find((task) => task.id == id);
-    console.log(singleTask);
     setIsShowModalOpen(true);
   };
 
@@ -52,7 +52,7 @@ export default function ProjectCard({ project, refetch }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        toast.success("Successfully project deleted");
         refetch();
       });
   };
@@ -86,7 +86,7 @@ export default function ProjectCard({ project, refetch }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        toast.success("Successfully project updated");
         refetch();
         setIsModalOpen(false);
       });
@@ -99,7 +99,6 @@ export default function ProjectCard({ project, refetch }) {
   useEffect(() => {
     setFilteredTaskList(filteredTask);
   }, [tasks]);
-  console.log(filteredTaskList);
 
   return (
     <Flex justify="center">

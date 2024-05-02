@@ -24,7 +24,6 @@ export default function Navbar() {
 
   const [current, setCurrent] = useState("");
   const onClick = (e) => {
-    console.log("click ", e);
     router.push("/" + e.key);
     setCurrent(e.key);
   };
@@ -47,13 +46,10 @@ export default function Navbar() {
     },
   };
   const isLoggedIn = NewStore((state) => state.isLoggedIn);
-  if (!isLoggedIn) {
-    router.push("/login");
-  }
 
   return (
     <div>
-      {isLoggedIn ? (
+      
         <nav className="relative border-b-2">
           <div className="flex justify-between items-center mx-auto px-5 md:px-20 lg:px-52">
             <div className="flex items-center gap-4 w-full py-3">
@@ -78,6 +74,7 @@ export default function Navbar() {
                   type="text"
                   onClick={() => {
                     NewStore.setState({ isLoggedIn: false });
+                    router.push("/login");
                   }}
                 >
                   Log out
@@ -95,9 +92,7 @@ export default function Navbar() {
             </Space>
           </div>
         </nav>
-      ) : (
-        ""
-      )}
+      
     </div>
   );
 }
