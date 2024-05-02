@@ -217,7 +217,11 @@ export default function ProjectCard({ project, refetch }) {
                         </p>
                         <p className="text-black text-sm">{task?.time}</p>
                         <p className="text-black text-sm">{task?.date}</p>
-                        {task?.assigned?.length > 1 ? <p>Assigned:</p> : ""}
+                        {task?.assigned?.length > 1 ? (
+                          <p className="text-black text-sm">Assigned:</p>
+                        ) : (
+                          ""
+                        )}
 
                         <ul className="flex gap-2 cursor-pointer text-sm">
                           {task?.assigned?.map((assign) => (
