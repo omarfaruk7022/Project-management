@@ -70,8 +70,7 @@ const Page = () => {
   return (
     <div>
       <div>
-        <h1>Projects</h1>
-        <div className="px-5 md:px-20 lg:px-52">
+        <div className="px-5 md:px-20 lg:px-52 py-2">
           <Button
             onClick={() => {
               setIsModalOpen(true);
@@ -124,7 +123,7 @@ const Page = () => {
             </div>
           </Modal>
         </div>
-        <div className="flex justify-center gap-5 flex-wrap px-5 md:px-20 lg:px-52">
+        <div className="flex gap-5 flex-wrap px-5 md:px-20 lg:px-52">
           {projects?.map((project) => (
             <ProjectCard
               key={project?.id}
