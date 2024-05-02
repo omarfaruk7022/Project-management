@@ -386,6 +386,7 @@ const Details = () => {
                         }}
                         size="large"
                         gap={2}
+                        title={user.name}
                       >
                         {user?.name.charAt(0)}
                       </Avatar>
