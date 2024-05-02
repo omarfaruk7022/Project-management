@@ -63,10 +63,10 @@ export default function ProjectCard({ project, refetch }) {
 
   const handleEditProject = (e, id) => {
     e.preventDefault();
-    const name = e.target.projectName.value;
-    const description = e.target.description.value;
-    const time = e.target.time.value;
-    const date = e.target.date.value;
+    const name = updateData?.name;
+    const description = updateData?.description;
+    const time = updateData?.time;
+    const date = updateData?.date;
 
     if (name === "" || description === "" || time === "" || date === "") {
       return alert("Please fill all the fields");
@@ -95,6 +95,13 @@ export default function ProjectCard({ project, refetch }) {
   const tasks = NewStore((state) => state.tasks);
 
   const filteredTask = tasks.filter((task) => task.projectId === project._id);
+
+  const [updateData, setUpdateData] = useState(null);
+
+  const handleUpdate = (project) => {
+    setIsModalOpen(true);
+    setUpdateData(project);
+  };
 
   useEffect(() => {
     setFilteredTaskList(filteredTask);
@@ -133,9 +140,7 @@ export default function ProjectCard({ project, refetch }) {
             <div className="flex flex-wrap gap-2 justify-end">
               <button
                 className="bg-blue-500 text-white px-2 py-1 rounded-lg cursor-pointer float-right"
-                onClick={() => {
-                  setIsModalOpen(true);
-                }}
+                onClick={() => handleUpdate(project)}
               >
                 Edit
               </button>
@@ -152,12 +157,23 @@ export default function ProjectCard({ project, refetch }) {
                   >
                     <input
                       name="projectName"
+                      value={updateData?.name}
+                      onChange={(e) =>
+                        setUpdateData({ ...updateData, name: e.target.value })
+                      }
                       type="text"
                       placeholder="Project name"
                       className="p-2 border-2 rounded-lg"
                     />
                     <input
                       name="description"
+                      value={updateData?.description}
+                      onChange={(e) =>
+                        setUpdateData({
+                          ...updateData,
+                          description: e.target.value,
+                        })
+                      }
                       type="text"
                       placeholder="Project description"
                       className="p-2 border-2 rounded-lg"
@@ -165,12 +181,20 @@ export default function ProjectCard({ project, refetch }) {
 
                     <input
                       name="time"
+                      value={updateData?.time}
+                      onChange={(e) =>
+                        setUpdateData({ ...updateData, time: e.target.value })
+                      }
                       type="time"
                       placeholder="Project time"
                       className="p-2 border-2 rounded-lg"
                     />
                     <input
                       name="date"
+                      value={updateData?.date}
+                      onChange={(e) =>
+                        setUpdateData({ ...updateData, date: e.target.value })
+                      }
                       type="date"
                       placeholder="Project date"
                       className="p-2 border-2 rounded-lg"

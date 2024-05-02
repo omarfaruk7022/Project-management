@@ -80,6 +80,7 @@ const Details = () => {
 
   const addTask = NewStore((state) => state.addTask);
   const editTask = NewStore((state) => state.editTask);
+  const [updateData, setUpdateData] = useState(null);
 
   const handleAddTask = (e) => {
     e.preventDefault();
@@ -121,10 +122,10 @@ const Details = () => {
     const task = {
       projectId: id,
       id: Math.floor(Math.random() * 100),
-      name: e.target.taskName.value,
-      description: e.target.description.value,
-      date: e.target.date.value,
-      time: e.target.time.value,
+      name: updateData.name,
+      description: updateData.description,
+      date: updateData.date,
+      time: updateData.time,
       status: "TodosList",
       assigned: [
         {
@@ -152,6 +153,11 @@ const Details = () => {
     }
   };
 
+  const handleUpdate = (task) => {
+    setIsEditModalOpen(true);
+    setUpdateData(task);
+  };
+
   const tasks = NewStore((state) => state.tasks);
   const updateTaskStatus = NewStore((state) => state.updateTaskStatus);
   useEffect(() => {
@@ -175,19 +181,18 @@ const Details = () => {
     updateTaskStatus(Number(draggableId), destination.droppableId);
   };
 
-
   const addAssigned = NewStore((state) => state.addAssigned);
   const handleAssignPerson = (taskAssigned, taskId, assigned) => {
     const assignedPerson = taskAssigned.find(
       (person) => person.name === assigned?.name
     );
     if (assignedPerson) {
-      toast.error("User already assigned");
+      toast.error("Member already assigned");
       return;
     }
 
     addAssigned(taskId, assigned);
-    toast.success("User assigned successfully");
+    toast.success("Member assigned successfully");
 
     if (
       assigned.name == "" ||
@@ -249,7 +254,6 @@ const Details = () => {
 
     setSearchTask(filtered);
   };
-
 
   return (
     <div>
@@ -436,21 +440,21 @@ const Details = () => {
                                 </p>
 
                                 <div>
-                                  <span className="text-black">Assigned:</span>
-                                  <div className="flex gap-3 flex-wrap py-3">
-                                    {task?.assigned?.map((user) => (
-                                      <Avatar
-                                        key={user?.id}
-                                        style={{
-                                          backgroundColor: "#7265e6",
-                                          verticalAlign: "middle",
-                                        }}
-                                        size="large"
-                                        gap={2}
-                                      >
-                                        {user?.name.charAt(0)}
-                                      </Avatar>
-                                    ))}
+                                  <div className="flex gap-2 items-center">
+                                    <div>
+                                      <span className="text-black">
+                                        Assigned:
+                                      </span>
+                                    </div>
+                                    <div className="flex gap-3 flex-wrap py-3">
+                                      {task?.assigned?.map((user) => (
+                                        <>
+                                          <span className="text-black">
+                                            {user?.name}
+                                          </span>
+                                        </>
+                                      ))}
+                                    </div>
                                   </div>
 
                                   <select
@@ -510,9 +514,7 @@ const Details = () => {
                                       </ul>
                                     </Modal>
                                     <button
-                                      onClick={() => {
-                                        setIsEditModalOpen(true);
-                                      }}
+                                      onClick={() => handleUpdate(task)}
                                       className="bg-green-500 text-white px-2 rounded-lg cursor-pointer "
                                     >
                                       Edit
@@ -532,12 +534,26 @@ const Details = () => {
                                         >
                                           <input
                                             name="taskName"
+                                            value={updateData?.name}
+                                            onChange={(e) =>
+                                              setUpdateData({
+                                                ...updateData,
+                                                name: e.target.value,
+                                              })
+                                            }
                                             type="text"
                                             placeholder="Task name"
                                             className="p-2 border-2 rounded-lg"
                                           />
                                           <input
                                             name="description"
+                                            value={updateData?.description}
+                                            onChange={(e) =>
+                                              setUpdateData({
+                                                ...updateData,
+                                                description: e.target.value,
+                                              })
+                                            }
                                             type="text"
                                             placeholder="Task description"
                                             className="p-2 border-2 rounded-lg"
@@ -546,12 +562,26 @@ const Details = () => {
                                           <input
                                             name="time"
                                             type="time"
+                                            value={updateData?.time}
+                                            onChange={(e) =>
+                                              setUpdateData({
+                                                ...updateData,
+                                                time: e.target.value,
+                                              })
+                                            }
                                             placeholder="Task date"
                                             className="p-2 border-2 rounded-lg"
                                           />
                                           <input
                                             name="date"
                                             type="date"
+                                            value={updateData?.date}
+                                            onChange={(e) =>
+                                              setUpdateData({
+                                                ...updateData,
+                                                date: e.target.value,
+                                              })
+                                            }
                                             placeholder="Task date"
                                             className="p-2 border-2 rounded-lg"
                                           />
@@ -623,21 +653,21 @@ const Details = () => {
                                   Deadline:{task?.time}, {task?.date}
                                 </p>
                                 <div>
-                                  <span className="text-black">Assigned:</span>
-                                  <div className="flex gap-3 flex-wrap py-3">
-                                    {task?.assigned?.map((user) => (
-                                      <Avatar
-                                        key={user?.id}
-                                        style={{
-                                          backgroundColor: "#7265e6",
-                                          verticalAlign: "middle",
-                                        }}
-                                        size="large"
-                                        gap={2}
-                                      >
-                                        {user?.name.charAt(0)}
-                                      </Avatar>
-                                    ))}
+                                  <div className="flex gap-2 items-center">
+                                    <div>
+                                      <span className="text-black">
+                                        Assigned:
+                                      </span>
+                                    </div>
+                                    <div className="flex gap-3 flex-wrap py-3">
+                                      {task?.assigned?.map((user) => (
+                                        <>
+                                          <span className="text-black">
+                                            {user?.name}
+                                          </span>
+                                        </>
+                                      ))}
+                                    </div>
                                   </div>
                                   <div>
                                     <button
@@ -692,23 +722,21 @@ const Details = () => {
                                     Deadline:{task?.time}, {task?.date}
                                   </p>
                                   <div>
-                                    <span className="text-black">
-                                      Assigned:
-                                    </span>
-                                    <div className="flex gap-3 flex-wrap py-3">
-                                      {task?.assigned?.map((user) => (
-                                        <Avatar
-                                          key={user?.id}
-                                          style={{
-                                            backgroundColor: "#7265e6",
-                                            verticalAlign: "middle",
-                                          }}
-                                          size="large"
-                                          gap={2}
-                                        >
-                                          {user?.name.charAt(0)}
-                                        </Avatar>
-                                      ))}
+                                    <div className="flex gap-2 items-center">
+                                      <div>
+                                        <span className="text-black">
+                                          Assigned:
+                                        </span>
+                                      </div>
+                                      <div className="flex gap-3 flex-wrap py-3">
+                                        {task?.assigned?.map((user) => (
+                                          <>
+                                            <span className="text-black">
+                                              {user?.name}
+                                            </span>
+                                          </>
+                                        ))}
+                                      </div>
                                     </div>
                                     <div>
                                       <button
